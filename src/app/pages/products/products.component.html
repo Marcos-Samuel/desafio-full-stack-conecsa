@@ -1,0 +1,24 @@
+<h1>Gerenciamento de Produtos</h1>
+
+<div class="conteiner">
+  <input
+    [(ngModel)]="newProduct.productName"
+    placeholder="Nome do Produto"
+    maxlength="20"
+  />
+  <input
+    [(ngModel)]="newProduct.productDescription"
+    placeholder="Descrição"
+    maxlength="50"
+  />
+  <input [(ngModel)]="newProduct.code" placeholder="Código" maxlength="10" />
+  <input type="number" [(ngModel)]="newProduct.qnt" placeholder="Quantidade" />
+  <button (click)="addProduct()">Adicionar Produto</button>
+</div>
+
+<ul>
+  <li *ngFor="let product of products$ | async">
+    <span>{{ product.productName }} - {{ product.qnt }}</span>
+    <button (click)="deleteProduct(product.id!)">Deletar</button>
+  </li>
+</ul>

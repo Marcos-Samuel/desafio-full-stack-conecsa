@@ -1,0 +1,26 @@
+<div class="modal-overlay">
+  <div class="modal">
+    <h2>Editar Produto</h2>
+
+    <label>Nome do Produto:</label>
+    <input type="text" [(ngModel)]="productCopy.productName" maxlength="20" />
+
+    <label>Descrição:</label>
+    <input
+      type="text"
+      [(ngModel)]="productCopy.productDescription"
+      maxlength="50"
+    />
+
+    <label>Código:</label>
+    <input type="text" [(ngModel)]="productCopy.code" maxlength="10" />
+
+    <label>Quantidade:</label>
+    <input type="number" [(ngModel)]="productCopy.qnt" />
+
+    <div class="modal-actions">
+      <button (click)="close()">Cancelar</button>
+      <button (click)="save()">Salvar</button>
+    </div>
+  </div>
+</div>
