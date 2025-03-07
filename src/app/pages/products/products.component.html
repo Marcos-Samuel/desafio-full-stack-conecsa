@@ -1,24 +1,129 @@
-<h1>Gerenciamento de Produtos</h1>
-
 <div class="conteiner">
-  <input
-    [(ngModel)]="newProduct.productName"
-    placeholder="Nome do Produto"
-    maxlength="20"
-  />
-  <input
-    [(ngModel)]="newProduct.productDescription"
-    placeholder="Descrição"
-    maxlength="50"
-  />
-  <input [(ngModel)]="newProduct.code" placeholder="Código" maxlength="10" />
-  <input type="number" [(ngModel)]="newProduct.qnt" placeholder="Quantidade" />
-  <button (click)="addProduct()">Adicionar Produto</button>
-</div>
+  <app-header> </app-header>
+  <main>
+    <form
+      class="content-form"
+      [formGroup]="productForm"
+      (ngSubmit)="addProduct()"
+    >
+      <div class="content-input">
+        <label for="productName">Nome do Produto<strong>*</strong></label>
+        <input
+          id="productName"
+          formControlName="productName"
+          placeholder="Nome do Produto"
+          maxlength="20"
+        />
+        <div
+          *ngIf="
+            productForm.get('productName')?.invalid &&
+            productForm.get('productName')?.touched
+          "
+        >
+          <small
+            class="error-message"
+            *ngIf="productForm.get('productName')?.hasError('required')"
+            >Nome do produto é obrigatório.</small
+          >
+        </div>
+      </div>
 
-<ul>
-  <li *ngFor="let product of products$ | async">
-    <span>{{ product.productName }} - {{ product.qnt }}</span>
-    <button (click)="deleteProduct(product.id!)">Deletar</button>
-  </li>
-</ul>
+      <div class="content-input">
+        <label for="productDescription">Descrição<strong>*</strong></label>
+        <input
+          id="productDescription"
+          formControlName="productDescription"
+          placeholder="Descrição"
+          maxlength="50"
+        />
+        <div
+          *ngIf="
+            productForm.get('productDescription')?.invalid &&
+            productForm.get('productDescription')?.touched
+          "
+        >
+          <small
+            class="error-message"
+            *ngIf="productForm.get('productDescription')?.hasError('required')"
+            >Descrição é obrigatória.</small
+          >
+        </div>
+      </div>
+
+      <div class="content-input">
+        <label for="code">Código<strong>*</strong></label>
+        <input
+          id="code"
+          formControlName="code"
+          placeholder="Código"
+          maxlength="10"
+        />
+        <div
+          *ngIf="
+            productForm.get('code')?.invalid && productForm.get('code')?.touched
+          "
+        >
+          <small
+            class="error-message"
+            *ngIf="productForm.get('code')?.hasError('required')"
+            >Código é obrigatório.</small
+          >
+        </div>
+      </div>
+
+      <div class="content-input">
+        <label for="qnt">Quantidade<strong>*</strong></label>
+        <input
+          id="qnt"
+          type="number"
+          formControlName="qnt"
+          placeholder="Quantidade"
+        />
+        <div
+          *ngIf="
+            productForm.get('qnt')?.invalid && productForm.get('qnt')?.touched
+          "
+        >
+          <small
+            class="error-message"
+            *ngIf="productForm.get('qnt')?.hasError('required')"
+            >Quantidade é obrigatória.</small
+          >
+          <small
+            class="error-message"
+            *ngIf="productForm.get('qnt')?.hasError('min')"
+            >Quantidade deve ser maior que 0.</small
+          >
+        </div>
+      </div>
+
+      <div class="content-input">
+        <button type="submit" [disabled]="productForm.invalid">
+          Adicionar Produto
+        </button>
+      </div>
+    </form>
+
+    <app-card-products
+      *ngIf="products$ | async as products"
+      (edit)="editProduct($event)"
+      (delete)="deleteProduct($event)"
+      [products]="products"
+    ></app-card-products>
+
+    <app-confirmation-modal
+      *ngIf="isConfirmationModalOpen"
+      [isOpen]="isConfirmationModalOpen"
+      [message]="'Você tem certeza que deseja deletar o produto?'"
+      (confirmAction)="handleConfirmationAction($event)"
+    >
+    </app-confirmation-modal>
+
+    <app-edit-product-modal
+      *ngIf="isModalOpen"
+      [product]="selectedProduct"
+      (closeModal)="closeModal()"
+      (saveProduct)="saveChanges($event)"
+    ></app-edit-product-modal>
+  </main>
+</div>

@@ -1,11 +1,14 @@
 export const environment = {
+  production: false,
+  useEmulators: true,
   firebase: {
-    apiKey: 'AIzaSyCSXooB_ZukXKwUoRo15o34ARxDI6bSfJ0',
-    authDomain: 'to-do-bda11.firebaseapp.com',
-    projectId: 'to-do-bda11',
-    storageBucket: 'to-do-bda11.firebasestorage.app',
-    messagingSenderId: '885650558921',
-    appId: '1:885650558921:web:0df49f30141127bb9e2218',
-    measurementId: 'G-M9CL26CTME',
+    apiKey: 'AIzaSyBopTIJz5uMVUnihqj_7OMCO-cLSHg_nOU',
+    authDomain: 'product-dtb.firebaseapp.com',
+    databaseURL: 'https://product-dtb-default-rtdb.firebaseio.com',
+    projectId: 'product-dtb',
+    storageBucket: 'product-dtb.firebasestorage.app',
+    messagingSenderId: '606985824439',
+    appId: '1:606985824439:web:ea9bb839d58fc0ea2c8532',
+    measurementId: 'G-E10TEYCKFV',
   },
 };

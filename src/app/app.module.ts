@@ -6,7 +6,6 @@ import { ProductsComponent } from './pages/products/products.component';
 import { EditProductModalComponent } from './components/edit-product-modal/edit-product-modal.component';
 
 @NgModule({
-  declarations: [EditProductModalComponent],
   imports: [CommonModule, BrowserModule, FormsModule, ProductsComponent],
 })
 export class AppModule {}
