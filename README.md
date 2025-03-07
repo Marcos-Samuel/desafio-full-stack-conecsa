@@ -27,6 +27,35 @@ https://product-dtb.web.app
 ## 📝 Pages <a id="-pages"></a>
 
 ![alt Autores](./public/assets/imgreadme.png)
+
+
+## 📝 Sobre <a id="-sobre"></a>
+
+Este projeto é uma aplicação desenvolvida com Angular e firebase. 
+Ele utiliza o Angular CLI para facilitar o desenvolvimento e oferece uma estrutura modular para melhor organização do código. Além disso, a aplicação é responsiva e otimizada para desempenho.
+
+## 📝 Funcionalidades
+
+Criar Conta no Firebase: Configuração e integração do Firebase para armazenamento de dados.
+
+Adicionar Produto: Permite cadastrar um novo produto com os seguintes campos:
+
+Nome (máximo de 20 caracteres)
+
+Descrição (máximo de 50 caracteres)
+
+Código (máximo de 10 caracteres)
+
+Quantidade (valor numérico inteiro)
+
+Editar Produto: Possibilidade de modificar informações de um produto já cadastrado.
+
+Listar Produtos: Exibição de todos os produtos cadastrados no sistema.
+
+Excluir Produto: Remoção de um produto do banco de dados.
+
+Persistência de Dados: Integração com Firebase para manter os dados salvos e acessíveis entre sessões
+
 ## 🚀 Tecnologias Utilizadas
 
 > Abaixo estão as 8 tecnologias utilizadas no desenvolvimento do projeto, e o motivo de usá-las.
