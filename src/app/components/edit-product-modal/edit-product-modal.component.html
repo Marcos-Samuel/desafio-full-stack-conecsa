@@ -2,25 +2,32 @@
   <div class="modal">
     <h2>Editar Produto</h2>
 
-    <label>Nome do Produto:</label>
-    <input type="text" [(ngModel)]="productCopy.productName" maxlength="20" />
-
-    <label>Descrição:</label>
-    <input
-      type="text"
-      [(ngModel)]="productCopy.productDescription"
-      maxlength="50"
-    />
-
-    <label>Código:</label>
-    <input type="text" [(ngModel)]="productCopy.code" maxlength="10" />
-
-    <label>Quantidade:</label>
-    <input type="number" [(ngModel)]="productCopy.qnt" />
+    <form [formGroup]="formGroup">
+      <div class="content-input-modal">
+        <label>Nome do Produto:</label>
+        <input type="text" formControlName="productName" maxlength="20" />
+      </div>
+      <div class="content-input-modal">
+        <label>Descrição:</label>
+        <input
+          type="text"
+          formControlName="productDescription"
+          maxlength="50"
+        />
+      </div>
+      <div class="content-input-modal">
+        <label>Código:</label>
+        <input type="text" formControlName="code" maxlength="10" />
+      </div>
+      <div class="content-input-modal">
+        <label>Quantidade:</label>
+        <input type="number" formControlName="qnt" />
+      </div>
+    </form>
 
     <div class="modal-actions">
       <button (click)="close()">Cancelar</button>
-      <button (click)="save()">Salvar</button>
+      <button (click)="save()" [disabled]="formGroup.invalid">Salvar</button>
     </div>
   </div>
 </div>

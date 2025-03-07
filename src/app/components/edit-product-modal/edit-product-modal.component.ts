@@ -1,33 +1,63 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  OnChanges,
+  SimpleChanges,
+  EventEmitter,
+} from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../../services/product.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-product-modal',
+  standalone: true,
   templateUrl: './edit-product-modal.component.html',
-  styleUrl: './edit-product-modal.component.css',
-  standalone: false,
+  styleUrls: ['./edit-product-modal.component.css'],
+  imports: [CommonModule, ReactiveFormsModule],
 })
-export class EditProductModalComponent {
+export class EditProductModalComponent implements OnChanges {
   @Input() product: Product | null = null;
+
   @Output() closeModal = new EventEmitter<void>();
   @Output() saveProduct = new EventEmitter<Product>();
 
-  productCopy: Product = {
-    id: this.product?.id || '',
-    productName: this.product?.productName || '',
-    productDescription: this.product?.productDescription || '',
-    code: this.product?.code || '',
-    qnt: this.product?.qnt || 0,
-  };
+  private productSubject = new BehaviorSubject<Product | null>(null);
+  product$: Observable<Product | null> = this.productSubject.asObservable();
 
-  ngOnChanges() {
-    if (this.product) {
-      this.productCopy = { ...this.product };
+  formGroup = new FormGroup({
+    productName: new FormControl<string>('', Validators.required),
+    productDescription: new FormControl<string>('', Validators.required),
+    code: new FormControl<string>('', Validators.required),
+    qnt: new FormControl<number>(0, [Validators.required, Validators.min(1)]),
+  });
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['product'] && this.product) {
+      this.productSubject.next(this.product);
+      this.formGroup.patchValue(this.product);
     }
   }
 
   save() {
-    this.saveProduct.emit(this.productCopy);
+    if (this.formGroup.valid) {
+      const updatedProduct: Product = {
+        id: this.productSubject.getValue()?.id || '',
+        productName: this.formGroup.value.productName ?? '',
+        productDescription: this.formGroup.value.productDescription ?? '',
+        code: this.formGroup.value.code ?? '',
+        qnt: this.formGroup.value.qnt ?? 0,
+      };
+      this.saveProduct.emit(updatedProduct);
+      this.closeModal.emit();
+    }
   }
 
   close() {
