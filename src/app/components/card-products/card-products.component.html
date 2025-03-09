@@ -1,10 +1,12 @@
 <div class="products-container">
   <div class="product-card" *ngFor="let product of products">
     <img src="assets/produto.png" alt="{{ product.productName }}" />
-    <h3>{{ product.productName }}</h3>
-    <p>{{ product.productDescription }}</p>
-    <span>Código: {{ product.code }}</span>
-    <span>Quantidade: {{ product.qnt }}</span>
+    <div class="content-text">
+      <h3>{{ product.productName }}</h3>
+      <p>{{ product.productDescription }}</p>
+      <span>Código: {{ product.code }}</span>
+      <span>Quantidade: {{ product.qnt }}</span>
+    </div>
     <div class="actions">
       <button (click)="onEdit(product)">Editar</button>
       <button (click)="onDelete(product.id!)">Excluir</button>

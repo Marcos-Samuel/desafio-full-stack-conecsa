@@ -43,6 +43,9 @@
   flex-direction: column;
   align-items: start;
 }
+strong {
+  color: var(--color-red-1);
+}
 
 button {
   padding: 10px 15px;

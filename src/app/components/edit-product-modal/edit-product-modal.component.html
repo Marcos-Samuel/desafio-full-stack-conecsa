@@ -4,11 +4,11 @@
 
     <form [formGroup]="formGroup">
       <div class="content-input-modal">
-        <label>Nome do Produto:</label>
+        <label>Nome do Produto<strong>*</strong></label>
         <input type="text" formControlName="productName" maxlength="20" />
       </div>
       <div class="content-input-modal">
-        <label>Descrição:</label>
+        <label>Descrição<strong>*</strong></label>
         <input
           type="text"
           formControlName="productDescription"
@@ -16,11 +16,11 @@
         />
       </div>
       <div class="content-input-modal">
-        <label>Código:</label>
+        <label>Código<strong>*</strong></label>
         <input type="text" formControlName="code" maxlength="10" />
       </div>
       <div class="content-input-modal">
-        <label>Quantidade:</label>
+        <label>Quantidade<strong>*</strong></label>
         <input type="number" formControlName="qnt" />
       </div>
     </form>
